@@ -228,6 +228,7 @@ def prepare_cleaned_features(X, iqr_k=1.5):
         (N, F) float ndarray with no NaNs, columns clipped to IQR bounds.
     """
     # TODO: Produce a clean numeric matrix via impute then IQR clip
+    X = np.asarray(X)
     X = impute_nan_with_mean(X)
     lower, upper = compute_iqr_bounds(X, iqr_k)
     X = clip_columns(X, lower, upper)
@@ -288,6 +289,26 @@ def evaluate_predictions(y_true, y_pred):
         "residual_summary": residual_s
     }
 
-# Step 24 - house_price_pipeline (not yet solved)
-# TODO: implement
+# Step 24 - house_price_pipeline
+def house_price_pipeline(X, y, ratio_num_idx, ratio_den_idx, cat_labels=None, train_ratio=0.7, val_ratio=0.15, seed=42, iqr_k=1.5):
+    # TODO: Run full clean->featurize->split->standardize->OLS->evaluate pipeline...
+    X = np.asarray(X)
+    y = np.asarray(y)
+    X_clean = prepare_cleaned_features(X, iqr_k)
+    X_feat = assemble_feature_matrix(X_clean, ratio_num_idx, ratio_den_idx, cat_labels)
+    splits = make_train_val_test(X_feat, y, train_ratio. val_ratio, seed)
+    result,_, _ = standardize_and_add_bias(splits)
+    theta = ols_fit(result["X_train"], result["y_train"])
+    y_test_pred = ols_predict(result["X_test"], theta)
+    y_val_pred = ols_predict(result["X_val"], theta)
+    eva_test = evaluate_predictions(result["y_test"], y_test_pred)
+    eva_val = evaluate_predictions(result["y_val"], y_val_pred)
+
+    return {
+        "theta": theta,
+        "y_test": result["y_test"],
+        "y_test_pred": y_test_pred,
+        "test_metrics": eva_test,
+        "val_metrics": eva_val
+    }
 
