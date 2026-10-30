@@ -127,8 +127,13 @@ def add_bias_column(X):
     X = np.column_stack((newcol, X))
     return X
 
-# Step 10 - make_shuffled_indices (not yet solved)
-# TODO: implement
+# Step 10 - make_shuffled_indices
+def make_shuffled_indices(n_samples, seed):
+    # TODO: Create a reproducibly shuffled permutation of row indices.
+    # Đây là bước tạo indices đã xáo trộn để tránh mô hình học vẹt
+    np.random.seed(seed)
+    indices = np.random.permutation(n_samples)
+    return indices
 
 # Step 11 - partition_indices (not yet solved)
 # TODO: implement
