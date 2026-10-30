@@ -274,8 +274,19 @@ def standardize_and_add_bias(splits):
             
     return result, mean, std
 
-# Step 23 - evaluate_predictions (not yet solved)
-# TODO: implement
+# Step 23 - evaluate_predictions
+def evaluate_predictions(y_true, y_pred):
+    # TODO: Bundle MAE, RMSE, R^2, and residual summary into one metrics dict.
+    MAE = mean_absolute_error(y_true, y_pred)
+    RMSE = root_mean_squared_error(y_true, y_pred)
+    r_2 = r_squared(y_true, y_pred)
+    residual_s = residual_summary(y_true, y_pred)
+    return {
+        "mae": MAE,
+        "rmse": RMSE,
+        "r2": r_2,
+        "residual_summary": residual_s
+    }
 
 # Step 24 - house_price_pipeline (not yet solved)
 # TODO: implement
