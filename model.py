@@ -135,8 +135,16 @@ def make_shuffled_indices(n_samples, seed):
     indices = np.random.permutation(n_samples)
     return indices
 
-# Step 11 - partition_indices (not yet solved)
-# TODO: implement
+# Step 11 - partition_indices
+def partition_indices(indices, train_ratio, val_ratio):
+    # TODO: Split a shuffled index array into train, validation, and test index arrays.
+    N = len(indices)
+    n_train = int(N * train_ratio)
+    n_val = int(N * val_ratio)
+    train_idx = indices[0: n_train]
+    val_idx = indices[n_train:n_train+n_val]
+    test_idx = indices[n_train+n_val:]
+    return train_idx, val_idx, test_idx
 
 # Step 12 - subset_xy (not yet solved)
 # TODO: implement
