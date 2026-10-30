@@ -82,8 +82,25 @@ def append_column(X, col):
     X = np.asarray(X) 
     return np.column_stack((X, col))
 
-# Step 6 - one_hot_encode (not yet solved)
-# TODO: implement
+# Step 6 - one_hot_encode
+def one_hot_encode(labels):
+    # TODO: Convert a 1-D array of categorical labels into a dense binary one-hot matrix.
+    """
+        Đây là bước chuyển các features dạng chữ thành mã one-hot
+        - Lấy tất cả các giá trị duy nhất trong labels và sắp xếp: X(N,)
+        - Tạo một vector K toàn 0 với shape (N, ) và so với X với mỗi giá trị
+        trong X được gán cho K với idx giá trị đó tại K = 1
+    """
+    label = sorted(list(set(labels)))
+    dct = {}
+    for i in range(len(label)):
+        tmp = np.zeros(len(label))
+        tmp[i] = 1
+        dct[label[i]] = tmp 
+    result = []
+    for i in labels:
+        result.append(dct[i])
+    return np.array(result)
 
 # Step 7 - fit_standardizer (not yet solved)
 # TODO: implement
