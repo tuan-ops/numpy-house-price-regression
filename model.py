@@ -203,8 +203,18 @@ def r_squared(y_true, y_pred):
     R_2 = 1 - SS_res / SS_tot
     return R_2
 
-# Step 18 - residual_summary (not yet solved)
-# TODO: implement
+# Step 18 - residual_summary
+def residual_summary(y_true, y_pred):
+    # TODO: Return a compact dict summarizing prediction residuals...
+    error = y_true - y_pred
+    mean = np.mean(error)
+    std = np.std(error, ddof = 0)
+    median_abs = np.median(np.abs(error))
+    return {
+        "mean": mean,
+        "std": float(std),
+        "median_abs": median_abs
+    }
 
 # Step 19 - prepare_cleaned_features (not yet solved)
 # TODO: implement
