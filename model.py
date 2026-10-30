@@ -29,8 +29,24 @@ def impute_nan_with_mean(X):
             X[:, j] = np.nan_to_num(X[:, j], nan = np.nanmean(X[:, j]))
     return X
 
-# Step 2 - compute_iqr_bounds (not yet solved)
-# TODO: implement
+# Step 2 - compute_iqr_bounds
+def compute_iqr_bounds(X, k=1.5):
+    # TODO: Compute per-column lower/upper clip bounds using the IQR rule.
+    """
+        Phương pháp thống kê nhằm xác định giá trị ngoại lai 
+        Phương pháp này xác định giá trị ngoại lai bằng cách tính 
+            Tứ phân vị thứ nhất Q1: tức là 25% giá trị nhỏ hơn hoặc bằng giá trị này
+            Tứ phân vị thứ ba Q3: tức là 50% giá trị nhỏ hơn hoặc bằng giá trị này
+        Sau đó xây dựng 2 khoảng
+            Lower Bound = Q1 - k * (Q3 - Q1)
+            Upper Bound = Q3 + k * (Q3 - Q1) 
+    """
+    Q1 = np.percentile(X, 25, axis = 0)
+    Q3 = np.percentile(X, 75, axis = 0)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - k * IQR 
+    upper_bound = Q3 + k * IQR 
+    return lower_bound, upper_bound
 
 # Step 3 - clip_columns (not yet solved)
 # TODO: implement
