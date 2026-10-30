@@ -75,8 +75,12 @@ def make_ratio_feature(numerator, denominator, eps=1e-8):
     # Bước này giúp tính tỉ lệ giữa 2 feature với nhau để giàu đặc trưng hơn
     return numerator / (denominator + eps)
 
-# Step 5 - append_column (not yet solved)
-# TODO: implement
+# Step 5 - append_column
+import numpy
+def append_column(X, col):
+    # TODO: Horizontally append one 1-D feature column onto a design matrix.
+    X = np.asarray(X) 
+    return np.column_stack((X, col))
 
 # Step 6 - one_hot_encode (not yet solved)
 # TODO: implement
