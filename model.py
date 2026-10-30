@@ -17,7 +17,11 @@ def impute_nan_with_mean(X):
     Returns:
         (N, F) float ndarray with no NaNs.
     """
-    # TODO: Replace every NaN with that column's nan-aware mean...
+    """
+        Đây là bước kiểm tra chuyển đổi các giá trị Nan ở trong ma trận đầu vào X
+        Nếu một cột (feature) toàn giá trị Nan thì chuyển hết thành 0.0
+        Nếu một cột(feature) lẫn giá trị Nan với giá trị số thì gán giá trị Nan bằng trung bình các giá trị số trong cột
+    """
     X = np.asarray(X)
     all_nan_col = np.all(np.isnan(X), axis = 0)
     all_nan_col_idx = np.where(all_nan_col)[0]
